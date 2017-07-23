@@ -6,6 +6,18 @@
  ** 2017 - All rights reserved
  ***************************************/
 
-export const changeColor = () => ({
-    type: 'CHANGE_COLOR'
+export const topLeft = () => ({
+    type: 'TOP_LEFT'
+})
+
+export const topRight = () => ({
+    type: 'TOP_RIGHT'
+})
+
+export const bottomLeft = () => ({
+    type: 'BOTTOM_LEFT'
+})
+
+export const changeNumberCarre = () => ({
+    type: 'NUMBER_CARRE'
 })

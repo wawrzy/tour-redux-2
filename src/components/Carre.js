@@ -8,7 +8,7 @@
 
 import React from 'react'
 
-const Carre = ({color, children}) => {
+const Carre = ({color, children, carres, index, topLeft, topRight, bottomLeft}) => {
 	const styles = {
 		border: '1px solid black',
 		display: 'flex',
@@ -17,10 +17,28 @@ const Carre = ({color, children}) => {
 		justifyContent: 'center',
 		alignItems: 'center'
 	}
-	return (
-		<div style={styles} >
-			{children}
+	let carre = undefined
+
+	if (index === 0) {
+		carre = <div style={styles} onClick={topLeft}>
+            		{color}
+				</div>
+	} else if (index === 1) {
+        carre = <div style={styles} onClick={topRight}>
+            {color}
 		</div>
+	} else if (index === carres.length - 2) {
+        carre = <div style={styles} onClick={bottomLeft}>
+            {color}
+		</div>
+    }  else {
+        carre = <div style={styles}>
+            		{color}
+				</div>
+	}
+
+	return (
+		carre
 	)
 };
 

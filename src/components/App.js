@@ -4,7 +4,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import Carre from './Carre'
 
-const AppComponent = ({ carres, changeColor}) => {
+const AppComponent = ({carres, topLeft, topRight, bottomLeft, changeNumberCarre}) => {
 	const styles = {
 		display: 'flex',
 		flexDirection: 'column',
@@ -17,15 +17,20 @@ const AppComponent = ({ carres, changeColor}) => {
 		flex: '1 1',
 		height: '50%'
 	}
+    if (carres.length % 2 === 1) {
+		carres = []
+	}
 	return (
 		<div style={styles}>
+			<input
+				id="inputId"
+				onChange={changeNumberCarre}
+				type="text"
+			/>
 			{
 				Array.from(Array(carres.length / 2).keys()).map((_, i) => {
 					const tab = carres.map((e, i) => (
-
-						<Carre key={'carre' + i} color={e.color} onClick={changeColor}>{
-							console.log(e)
-						}</Carre>
+                        <Carre key={'carre' + i} carres={carres} color={e.color} index={i} bottomLeft={bottomLeft} topRight={topRight} topLeft={topLeft} >Test</Carre>
 					));
 					return (
 						<div key={'subdivider' + i} style={stylesTab} >
@@ -40,7 +45,10 @@ const AppComponent = ({ carres, changeColor}) => {
 	)
 }
 
-import { changeColor } from '../actions/Click'
+import { topLeft } from '../actions/Click'
+import { topRight } from '../actions/Click'
+import { bottomLeft } from '../actions/Click'
+import { changeNumberCarre } from '../actions/Click'
 
 
 const mapStateToProps = ({ AppReducer }, ownProps) => {
@@ -50,7 +58,10 @@ const mapStateToProps = ({ AppReducer }, ownProps) => {
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-    changeColor: () => dispatch(changeColor())
+    topLeft: () => dispatch(topLeft()),
+	topRight: () => dispatch(topRight()),
+	bottomLeft: () => dispatch(bottomLeft()),
+    changeNumberCarre: () => dispatch(changeNumberCarre())
 })
 
 const App = connect(
